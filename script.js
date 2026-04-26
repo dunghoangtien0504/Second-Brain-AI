@@ -10,6 +10,44 @@ const observer = new IntersectionObserver((entries) => {
 
 document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
 
+function startCountdown() {
+  const hoursEl = document.getElementById('cd-hours');
+  const minutesEl = document.getElementById('cd-minutes');
+  const secondsEl = document.getElementById('cd-seconds');
+  if (!hoursEl || !minutesEl || !secondsEl) return;
+
+  const storageKey = 'contentos_offer_deadline_ms';
+  const countdownDurationMs = 12 * 60 * 60 * 1000;
+  const now = Date.now();
+  let deadline = Number(localStorage.getItem(storageKey) || 0);
+
+  if (!deadline || deadline <= now) {
+    deadline = now + countdownDurationMs;
+    localStorage.setItem(storageKey, String(deadline));
+  }
+
+  const update = () => {
+    const diff = deadline - Date.now();
+    if (diff <= 0) {
+      deadline = Date.now() + countdownDurationMs;
+      localStorage.setItem(storageKey, String(deadline));
+    }
+
+    const remaining = Math.max(0, deadline - Date.now());
+    const totalSeconds = Math.floor(remaining / 1000);
+    const hours = Math.floor(totalSeconds / 3600);
+    const minutes = Math.floor((totalSeconds % 3600) / 60);
+    const seconds = totalSeconds % 60;
+
+    hoursEl.textContent = String(hours).padStart(2, '0');
+    minutesEl.textContent = String(minutes).padStart(2, '0');
+    secondsEl.textContent = String(seconds).padStart(2, '0');
+  };
+
+  update();
+  setInterval(update, 1000);
+}
+
 // Form handling
 const PAYMENT_CONFIG = {
   bankId: 'MB',
@@ -144,3 +182,4 @@ document.querySelectorAll('.pain-list, .modules-grid, .stack-items, .promise-car
 
 // Render QR mặc định ngay khi tải trang để tránh ô trống.
 renderVietQr(PAYMENT_CONFIG.amount, `${PAYMENT_CONFIG.transferPrefix} 0000000000`);
+startCountdown();

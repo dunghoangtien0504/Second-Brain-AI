@@ -27,14 +27,6 @@
       <span class="price-now">299.000đ</span>
       <span class="price-badge">Early Bird</span>
     </div>
-    <div class="hero-countdown" aria-live="polite">
-      <div class="countdown-label">⏰ Ưu đãi kết thúc sau</div>
-      <div class="countdown-grid">
-        <div class="countdown-item"><span id="cd-hours">00</span><small>Giờ</small></div>
-        <div class="countdown-item"><span id="cd-minutes">00</span><small>Phút</small></div>
-        <div class="countdown-item"><span id="cd-seconds">00</span><small>Giây</small></div>
-      </div>
-    </div>
     <br>
     <a href="#order" class="btn-primary" onclick="document.getElementById('order').scrollIntoView({behavior:'smooth'});return false;">Tải Ngay — Dùng Được Hôm Nay →</a>
     <p class="hero-note">🔒 Giao ngay qua email sau khi thanh toán · Không cần cài phần mềm</p>
@@ -172,7 +164,17 @@
     <div class="order-card">
       <div class="order-summary">
         <div class="order-summary-name">🎯 Content OS — Second Brain Notion</div>
-        <div class="order-summary-price"><s>1.699.000đ</s> 299.000đ</div>
+        <div class="order-summary-total">Giá trị tổng <s>1.699.000đ</s></div>
+        <div class="order-summary-price">299.000đ</div>
+      </div>
+      <div class="order-countdown" aria-live="polite">
+        <div class="order-countdown-label">⏰ Ưu đãi kết thúc sau</div>
+        <div class="order-countdown-grid">
+          <div class="order-countdown-item"><span id="cd-days">00</span><small>Ngày</small></div>
+          <div class="order-countdown-item"><span id="cd-hours">00</span><small>Giờ</small></div>
+          <div class="order-countdown-item"><span id="cd-minutes">00</span><small>Phút</small></div>
+          <div class="order-countdown-item"><span id="cd-seconds">00</span><small>Giây</small></div>
+        </div>
       </div>
       <div id="formSection" class="order-form">
         <div class="form-group"><label class="form-label" for="fullname">Họ và tên <span>*</span></label><input type="text" id="fullname" class="form-input" placeholder="Nguyễn Văn A"><span class="form-error" id="err-fullname">Vui lòng nhập họ tên</span></div>

@@ -11,6 +11,7 @@ const observer = new IntersectionObserver((entries) => {
 document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
 
 function startCountdown() {
+  const daysEl = document.getElementById('cd-days');
   const hoursEl = document.getElementById('cd-hours');
   const minutesEl = document.getElementById('cd-minutes');
   const secondsEl = document.getElementById('cd-seconds');
@@ -35,10 +36,12 @@ function startCountdown() {
 
     const remaining = Math.max(0, deadline - Date.now());
     const totalSeconds = Math.floor(remaining / 1000);
-    const hours = Math.floor(totalSeconds / 3600);
+    const days = Math.floor(totalSeconds / 86400);
+    const hours = Math.floor((totalSeconds % 86400) / 3600);
     const minutes = Math.floor((totalSeconds % 3600) / 60);
     const seconds = totalSeconds % 60;
 
+    if (daysEl) daysEl.textContent = String(days).padStart(2, '0');
     hoursEl.textContent = String(hours).padStart(2, '0');
     minutesEl.textContent = String(minutes).padStart(2, '0');
     secondsEl.textContent = String(seconds).padStart(2, '0');

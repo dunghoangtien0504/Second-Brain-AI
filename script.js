@@ -11,6 +11,33 @@ const observer = new IntersectionObserver((entries) => {
 document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
 
 // Form handling
+const PAYMENT_CONFIG = {
+  bankId: 'MB',
+  accountNo: '333303838',
+  accountName: 'HOANG TIEN DUNG',
+  amount: 299000,
+  template: 'compact2',
+  transferPrefix: 'SecondBrainAI'
+};
+
+function buildVietQrUrl(amount, addInfo) {
+  const baseUrl = `https://img.vietqr.io/image/${PAYMENT_CONFIG.bankId}-${PAYMENT_CONFIG.accountNo}-${PAYMENT_CONFIG.template}.png`;
+  const query = new URLSearchParams({
+    amount: String(amount),
+    addInfo: addInfo,
+    accountName: PAYMENT_CONFIG.accountName
+  });
+  return `${baseUrl}?${query.toString()}`;
+}
+
+function renderVietQr(amount, transferContent) {
+  const qrBox = document.querySelector('.payment-method .qr-placeholder');
+  if (!qrBox) return;
+
+  const qrUrl = buildVietQrUrl(amount, transferContent);
+  qrBox.innerHTML = `<img src="${qrUrl}" alt="QR chuyển khoản VietQR" style="max-width:100%;height:auto;border-radius:12px;display:block;margin:0 auto;" />`;
+}
+
 function handleSubmit() {
   var name = document.getElementById('fullname').value.trim();
   var phone = document.getElementById('phone').value.trim().replace(/\s/g, '');
@@ -41,9 +68,14 @@ function handleSubmit() {
   document.getElementById('greetingName').textContent = name;
   document.getElementById('greetingEmail').textContent = email;
   document.getElementById('greetingPhone').textContent = phone;
-  document.getElementById('transferNote').textContent = 'CONTENTOS ' + phone;
-  document.getElementById('transferNoteDisplay').textContent = 'CONTENTOS ' + phone;
+  document.getElementById('bankNum').textContent = PAYMENT_CONFIG.accountNo;
+  document.getElementById('amountDisplay').textContent = PAYMENT_CONFIG.amount.toLocaleString('vi-VN') + 'đ';
+
+  const transferContent = `${PAYMENT_CONFIG.transferPrefix} ${phone}`;
+  document.getElementById('transferNote').textContent = transferContent;
+  document.getElementById('transferNoteDisplay').textContent = transferContent;
   document.getElementById('confirmEmail').textContent = email;
+  renderVietQr(PAYMENT_CONFIG.amount, transferContent);
 
   document.getElementById('formSection').style.display = 'none';
   document.getElementById('paymentSection').classList.add('show');
@@ -58,7 +90,7 @@ function goBack() {
 
 function copyText(elId, btn) {
   var text = document.getElementById(elId).textContent.replace('đ', '').replace(/\./g, '').trim();
-  if (elId === 'amountDisplay') text = '299000';
+  if (elId === 'amountDisplay') text = String(PAYMENT_CONFIG.amount);
   if (elId === 'transferNote') text = document.getElementById(elId).textContent;
   navigator.clipboard.writeText(text).then(() => {
     btn.textContent = 'Đã copy ✓';

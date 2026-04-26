@@ -31,11 +31,16 @@ function buildVietQrUrl(amount, addInfo) {
 }
 
 function renderVietQr(amount, transferContent) {
-  const qrBox = document.querySelector('.payment-method .qr-placeholder');
+  const qrBox = document.getElementById('vietqrBox');
   if (!qrBox) return;
 
   const qrUrl = buildVietQrUrl(amount, transferContent);
-  qrBox.innerHTML = `<img src="${qrUrl}" alt="QR chuyển khoản VietQR" style="max-width:100%;height:auto;border-radius:12px;display:block;margin:0 auto;" />`;
+  qrBox.style.height = '220px';
+  qrBox.style.minHeight = '220px';
+  qrBox.style.padding = '10px';
+  qrBox.style.background = '#fff';
+  qrBox.style.overflow = 'hidden';
+  qrBox.innerHTML = `<img src="${qrUrl}" alt="QR chuyển khoản VietQR" style="width:200px;max-width:100%;height:200px;max-height:100%;object-fit:contain;display:block;margin:0 auto;border-radius:8px;" onerror="this.parentElement.innerHTML='⚠️ Không tải được QR. Vui lòng thử tải lại trang.';" />`;
 }
 
 function handleSubmit() {
@@ -136,3 +141,6 @@ const staggerObserver = new IntersectionObserver((entries) => {
 document.querySelectorAll('.pain-list, .modules-grid, .stack-items, .promise-cards, .forlist').forEach(el => {
   staggerObserver.observe(el);
 });
+
+// Render QR mặc định ngay khi tải trang để tránh ô trống.
+renderVietQr(PAYMENT_CONFIG.amount, `${PAYMENT_CONFIG.transferPrefix} 0000000000`);

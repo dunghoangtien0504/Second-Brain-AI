@@ -112,12 +112,12 @@
 .order-summary-name{font-size:14px;font-weight:600;color:rgba(255,255,255,.9)}
 .order-summary-total{font-size:13px;color:rgba(255,255,255,.72)}
 .order-summary-total s{margin-left:6px}
-.order-summary-price{font-size:58px;font-weight:900;line-height:1;letter-spacing:-.03em;color:#7FC5FF;background:linear-gradient(135deg,#5CC2FF,#D761FF);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;text-shadow:0 10px 30px rgba(76,145,255,.35)}
+.order-summary-price{font-size:58px;font-weight:900;line-height:1;letter-spacing:-.03em;color:#FF9A67;background:linear-gradient(135deg,#FFB088,#FF6B2C 55%,#FF4D3A);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;text-shadow:0 10px 30px rgba(255,107,44,.35)}
 .order-countdown{padding:14px 16px 18px;border-bottom:.6px solid rgba(255,255,255,.06)}
 .order-countdown-label{font-size:14px;font-weight:700;color:rgba(255,255,255,.92);text-align:center;margin-bottom:10px}
 .order-countdown-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
-.order-countdown-item{background:rgba(12,24,56,.78);border:1px solid rgba(92,194,255,.55);border-radius:12px;padding:10px 6px;display:flex;flex-direction:column;align-items:center;line-height:1;box-shadow:0 0 14px rgba(76,145,255,.18)}
-.order-countdown-item span{font-size:42px;font-weight:900;letter-spacing:-.02em;color:#6CC8FF;background:linear-gradient(135deg,#6CC8FF,#DE6BFF);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+.order-countdown-item{background:rgba(18,30,66,.78);border:1px solid rgba(255,143,85,.55);border-radius:12px;padding:10px 6px;display:flex;flex-direction:column;align-items:center;line-height:1;box-shadow:0 0 14px rgba(255,107,44,.2)}
+.order-countdown-item span{font-size:42px;font-weight:900;letter-spacing:-.02em;color:#FF9A67;background:linear-gradient(135deg,#FFB088,#FF6B2C 55%,#FF4D3A);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
 .order-countdown-item small{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:rgba(255,255,255,.82);margin-top:8px}
 .order-form{padding:26px;display:flex;flex-direction:column;gap:14px}
 .form-group{display:flex;flex-direction:column;gap:5px}

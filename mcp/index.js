@@ -151,14 +151,17 @@ const app = express();
 let transport;
 
 app.get('/mcp', (req, res) => {
+  console.log('[GET] /mcp - Establishing SSE connection');
   transport = new SSEServerTransport('/mcp/messages', res);
   server.connect(transport);
 });
 
 app.post('/mcp/messages', (req, res) => {
+  console.log('[POST] /mcp/messages - Received message');
   if (transport) {
     transport.handlePostMessage(req, res);
   } else {
+    console.log('Error: No active SSE connection');
     res.status(400).send('No active SSE connection');
   }
 });

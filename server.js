@@ -101,7 +101,7 @@ app.get('/admin', (req, res) => {
       </tr>
     `).join('');
 
-    res.send(\`
+    res.send(`
       <body style="background:#0c0c0c;color:#eee;font-family:sans-serif;padding:40px">
         <h1>CRM - Danh sách khách hàng mới</h1>
         <table style="width:100%;border-collapse:collapse;margin-top:20px">
@@ -114,12 +114,12 @@ app.get('/admin', (req, res) => {
               <th style="border:1px solid #444;padding:8px">Trạng thái</th>
             </tr>
           </thead>
-          <tbody>\${rowsHtml}</tbody>
+          <tbody>${rowsHtml}</tbody>
         </table>
         <br>
         <a href="/" style="color: #ffd600"> Quay lại Website</a>
       </body>
-    \`);
+    `);
   });
 });
 

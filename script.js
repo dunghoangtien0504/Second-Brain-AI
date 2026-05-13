@@ -111,6 +111,15 @@ function handleSubmit() {
 
   if (!valid) return;
 
+  // Send to CRM Backend
+  fetch('/api/submit-lead', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ name, email, phone })
+  }).then(response => response.json())
+    .then(data => console.log('CRM Sync:', data.message))
+    .catch(err => console.error('CRM Error:', err));
+
   document.getElementById('greetingName').textContent = name;
   document.getElementById('greetingEmail').textContent = email;
   document.getElementById('greetingPhone').textContent = phone;
